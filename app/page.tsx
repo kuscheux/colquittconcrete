@@ -10,6 +10,15 @@ import {
   Shovel,
   Sparkles,
 } from "lucide-react";
+import projectData from "../public/media/projects/projects.json";
+
+type PhotoProject = {
+  slug: string;
+  title: string;
+  type: string;
+  before: string[];
+  after: string[];
+};
 
 const contactEmail = "Colquittconcrete@yahoo.com";
 const contactPhone = "770-688-9648";
@@ -20,57 +29,59 @@ const services = [
   {
     title: "Driveways and parking pads",
     text: "New concrete pours, widened drives, clean control joints, and broom-finished surfaces built for daily use.",
-    image: "/media/IMG_3745.jpeg",
+    image: "/media/projects/large-residential-drive/after/03-IMG_8533.jpg",
   },
   {
     title: "Patios, porches, and walkways",
     text: "Backyard pads, curved patio extensions, front entries, porch slabs, and smooth transitions around homes.",
-    image: "/media/IMG_3945.jpeg",
+    image: "/media/projects/rear-patio-walk/after/01-IMG_3618.jpg",
   },
   {
     title: "Stamped and patterned concrete",
     text: "Decorative hex-pattern concrete for sidewalks, public paths, and custom outdoor surfaces.",
-    image: "/media/IMG_4035.jpeg",
+    image: "/media/projects/stamped-patio/after/01-4917369409842734588-10.jpg",
   },
   {
     title: "Demo, prep, and rebuilds",
     text: "Concrete removal, excavation, forms, base preparation, reinforcement, and replacement pours.",
-    image: "/media/IMG_4074.jpeg",
+    image: "/media/projects/shop-apron-slab/before/02-IMG_3038.jpg",
   },
 ];
 
 const gallery = [
   {
-    src: "/media/IMG_3745.jpeg",
-    label: "Residential driveway extension",
+    src: "/media/projects/backyard-driveway-slab/after/02-IMG_1995.jpg",
+    label: "Large backyard slab",
     type: "Driveway",
   },
   {
-    src: "/media/IMG_3945.jpeg",
-    label: "Fresh patio finish",
+    src: "/media/projects/side-driveway-extension/after/01-IMG_2206.jpg",
+    label: "Side driveway extension",
     type: "Patio",
   },
   {
-    src: "/media/IMG_4037.jpeg",
-    label: "Hex pattern walkway",
+    src: "/media/projects/stamped-patio/after/03-IMG_2696.jpg",
+    label: "Stamped finish",
     type: "Decorative",
   },
   {
-    src: "/media/IMG_4060.jpeg",
+    src: "/media/projects/curved-walkway/after/03-IMG_5144.jpg",
     label: "Curved concrete approach",
     type: "Walkway",
   },
   {
-    src: "/media/IMG_4070.jpeg",
-    label: "Backyard slab and apron",
+    src: "/media/projects/pool-deck-extension/after/02-IMG_2795.jpg",
+    label: "Pool deck extension",
     type: "Slab",
   },
   {
-    src: "/media/IMG_4081.jpeg",
-    label: "Large pad finishing",
+    src: "/media/projects/shop-apron-slab/after/01-IMG_3048.jpg",
+    label: "Shop apron slab",
     type: "Site work",
   },
 ];
+
+const photoProjects = projectData as PhotoProject[];
 
 const process = [
   "Site review and measurements",
@@ -100,8 +111,8 @@ export default function Home() {
       <section className="hero" id="top">
         <img
           className="heroImage"
-          src="/media/IMG_4081.jpeg"
-          alt="Large concrete slab being finished near a wooded property"
+          src="/media/projects/large-residential-drive/after/03-IMG_8533.jpg"
+          alt="Large finished concrete driveway near a residential home"
         />
         <div className="heroShade" />
         <div className="heroContent">
@@ -162,7 +173,7 @@ export default function Home() {
         <div className="serviceGrid">
           {services.map((service) => (
             <article className="serviceCard" key={service.title}>
-              <img src={service.image} alt="" />
+              <img src={service.image} alt="" loading="lazy" />
               <div>
                 <h3>{service.title}</h3>
                 <p>{service.text}</p>
@@ -182,19 +193,63 @@ export default function Home() {
             <h2>Recent concrete and outdoor work.</h2>
           </div>
           <p>
-            A mix of smooth broom-finished pads, large slabs, sidewalk work, and
-            decorative patterned concrete.
+            Finished driveways, slabs, pool deck work, curved walks, stamped
+            surfaces, and the prep photos that show how the finished work got
+            there.
           </p>
         </div>
         <div className="gallery">
           {gallery.map((item) => (
             <figure key={item.src} className="galleryItem">
-              <img src={item.src} alt={item.label} />
+              <img src={item.src} alt={item.label} loading="lazy" />
               <figcaption>
                 <span>{item.label}</span>
                 <small>{item.type}</small>
               </figcaption>
             </figure>
+          ))}
+        </div>
+        <div className="projectGroups" aria-label="Before and after projects">
+          {photoProjects.map((project) => (
+            <article className="projectCard" key={project.slug}>
+              <div className="projectCardHeader">
+                <div>
+                  <span>{project.type}</span>
+                  <h3>{project.title}</h3>
+                </div>
+                <a href={`#${project.slug}`}>View project</a>
+              </div>
+              <div className="phaseColumns" id={project.slug}>
+                {project.before.length > 0 ? (
+                  <div>
+                    <h4>Before</h4>
+                    <div className="phaseGrid">
+                      {project.before.slice(0, 4).map((src) => (
+                        <img
+                          key={src}
+                          src={src}
+                          alt={`${project.title} before`}
+                          loading="lazy"
+                        />
+                      ))}
+                    </div>
+                  </div>
+                ) : null}
+                <div>
+                  <h4>After</h4>
+                  <div className="phaseGrid">
+                    {project.after.slice(0, 4).map((src) => (
+                      <img
+                        key={src}
+                        src={src}
+                        alt={`${project.title} after`}
+                        loading="lazy"
+                      />
+                    ))}
+                  </div>
+                </div>
+              </div>
+            </article>
           ))}
         </div>
       </section>

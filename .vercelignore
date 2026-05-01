@@ -1,0 +1,7 @@
+Colquitt media/
+Colquitt media - humans cropped out/
+output/
+.playwright-cli/
+.npm-cache/
+.next/
+node_modules/

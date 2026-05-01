@@ -9,6 +9,8 @@ out
 # local artifacts
 output
 .playwright-cli
+Colquitt media/
+Colquitt media - humans cropped out/
 
 # environment
 .env*
@@ -16,3 +18,4 @@ output
 
 # OS
 .DS_Store
+.vercel
