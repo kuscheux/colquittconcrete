@@ -151,11 +151,17 @@ textarea {
   opacity: 0;
   filter: grayscale(0.18) contrast(1.04);
   transform: rotate(var(--hero-rotation, 0deg)) scale(1.02);
-  transition: opacity 900ms ease;
+  transition:
+    opacity 1800ms ease-in-out,
+    filter 1800ms ease-in-out,
+    transform 6400ms ease-out;
+  will-change: opacity, transform;
 }
 
 .heroImage[data-active="true"] {
   opacity: 1;
+  filter: grayscale(0.08) contrast(1.04);
+  transform: rotate(var(--hero-rotation, 0deg)) scale(1.055);
 }
 
 .heroShade {
@@ -390,6 +396,8 @@ h3 {
 }
 
 .workBand {
+  margin-top: -64px;
+  padding-top: clamp(42px, 6vw, 72px);
   background: var(--soft);
 }
 
@@ -549,6 +557,13 @@ h3 {
 
 .projectCardHeader h3 {
   margin: 5px 0 0;
+}
+
+.projectRequestButton {
+  min-height: 38px;
+  padding: 9px 13px;
+  font-size: 13px;
+  white-space: nowrap;
 }
 
 .phaseColumns {
@@ -743,6 +758,11 @@ h3 {
     min-height: 86vh;
   }
 
+  .workBand {
+    margin-top: -32px;
+    padding-top: 42px;
+  }
+
   .heroContent {
     padding-top: 130px;
     padding-bottom: 58px;
@@ -773,6 +793,15 @@ h3 {
 
   .sectionHeader p {
     margin-top: 0;
+  }
+
+  .projectCardHeader {
+    display: block;
+  }
+
+  .projectRequestButton {
+    width: fit-content;
+    margin-top: 14px;
   }
 
   .coverflowFrame {
@@ -818,6 +847,10 @@ h3 {
 
   .heroActions,
   .button {
+    width: 100%;
+  }
+
+  .projectRequestButton {
     width: 100%;
   }
 

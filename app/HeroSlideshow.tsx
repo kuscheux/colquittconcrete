@@ -16,7 +16,7 @@ export function HeroSlideshow({ slides }: { slides: HeroSlide[] }) {
   useEffect(() => {
     const timer = window.setInterval(() => {
       setActive((current) => (current + 1) % slides.length);
-    }, 5200);
+    }, 6400);
 
     return () => window.clearInterval(timer);
   }, [slides.length]);

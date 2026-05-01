@@ -10,8 +10,19 @@ import {
   Shovel,
   Sparkles,
 } from "lucide-react";
+import { ContactForm } from "./ContactForm";
 import { HeroSlideshow } from "./HeroSlideshow";
 import { ProjectCoverflow } from "./ProjectCoverflow";
+import {
+  businessName,
+  contactEmail,
+  contactPhone,
+  contactPhoneInternational,
+  defaultOgImage,
+  serviceNames,
+  siteDescription,
+  siteUrl,
+} from "./seo";
 import projectData from "../public/media/projects/projects.json";
 
 type PhotoProject = {
@@ -21,11 +32,6 @@ type PhotoProject = {
   before: string[];
   after: string[];
 };
-
-const contactEmail = "Colquittconcrete@yahoo.com";
-const contactPhone = "770-688-9648";
-const estimateHref =
-  "mailto:Colquittconcrete@yahoo.com?subject=Concrete%20Estimate%20Request&body=Name%3A%0APhone%20or%20email%3A%0AProject%20type%3A%0AProject%20address%3A%0AApproximate%20size%3A%0ADetails%3A";
 
 const services = [
   {
@@ -135,6 +141,25 @@ const featuredBeforeAfterProjects = featuredBeforeAfterSlugs.flatMap((slug) => {
   ];
 });
 
+function getProjectEstimateHref(project: PhotoProject) {
+  const subject = `Concrete estimate request - ${project.type}`;
+  const body = [
+    `I am interested in a project like this: ${project.title}`,
+    `Project type: ${project.type}`,
+    "",
+    "Name:",
+    "Phone or email:",
+    "Project address:",
+    "Approximate size:",
+    "",
+    "Details:",
+  ].join("\n");
+
+  return `mailto:${contactEmail}?subject=${encodeURIComponent(
+    subject
+  )}&body=${encodeURIComponent(body)}`;
+}
+
 const process = [
   "Site review and measurements",
   "Demo, grading, and form setup",
@@ -142,9 +167,109 @@ const process = [
   "Finish, joints, cleanup, and cure guidance",
 ];
 
+const structuredData = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebSite",
+      "@id": `${siteUrl}/#website`,
+      name: businessName,
+      url: siteUrl,
+      inLanguage: "en-US",
+      publisher: {
+        "@id": `${siteUrl}/#business`,
+      },
+    },
+    {
+      "@type": "WebPage",
+      "@id": `${siteUrl}/#webpage`,
+      name: businessName,
+      url: siteUrl,
+      description: siteDescription,
+      isPartOf: {
+        "@id": `${siteUrl}/#website`,
+      },
+      about: {
+        "@id": `${siteUrl}/#business`,
+      },
+      primaryImageOfPage: {
+        "@id": `${siteUrl}/#primaryimage`,
+      },
+      inLanguage: "en-US",
+    },
+    {
+      "@type": "ImageObject",
+      "@id": `${siteUrl}/#primaryimage`,
+      url: `${siteUrl}${defaultOgImage}`,
+      contentUrl: `${siteUrl}${defaultOgImage}`,
+      caption: "Finished concrete project by Colquitt Concrete and Outdoor Solutions",
+    },
+    {
+      "@type": ["LocalBusiness", "HomeAndConstructionBusiness"],
+      "@id": `${siteUrl}/#business`,
+      name: businessName,
+      url: siteUrl,
+      email: contactEmail,
+      telephone: contactPhoneInternational,
+      image: `${siteUrl}${defaultOgImage}`,
+      logo: `${siteUrl}/favicon.svg`,
+      description: siteDescription,
+      priceRange: "$$",
+      areaServed: [
+        "Residential concrete customers",
+        "Light commercial concrete customers",
+        "Local outdoor concrete project sites",
+      ],
+      contactPoint: [
+        {
+          "@type": "ContactPoint",
+          telephone: contactPhoneInternational,
+          email: contactEmail,
+          contactType: "estimates and project inquiries",
+          availableLanguage: "English",
+        },
+      ],
+      knowsAbout: serviceNames,
+      hasOfferCatalog: {
+        "@type": "OfferCatalog",
+        name: "Concrete and outdoor construction services",
+        itemListElement: serviceNames.map((serviceName) => ({
+          "@type": "Offer",
+          itemOffered: {
+            "@type": "Service",
+            name: serviceName,
+            provider: {
+              "@id": `${siteUrl}/#business`,
+            },
+            areaServed: "Local service area",
+          },
+        })),
+      },
+    },
+    {
+      "@type": "BreadcrumbList",
+      "@id": `${siteUrl}/#breadcrumbs`,
+      itemListElement: [
+        {
+          "@type": "ListItem",
+          position: 1,
+          name: "Home",
+          item: siteUrl,
+        },
+      ],
+    },
+  ],
+};
+
 export default function Home() {
   return (
     <main>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(structuredData).replace(/</g, "\\u003c"),
+        }}
+      />
       <nav className="nav" aria-label="Main navigation">
         <a className="brand" href="#top" aria-label="Colquitt Concrete home">
           <span className="brandMark">CC</span>
@@ -254,6 +379,12 @@ export default function Home() {
                   <span>{project.type}</span>
                   <h3>{project.title}</h3>
                 </div>
+                <a
+                  className="button projectRequestButton"
+                  href={getProjectEstimateHref(project)}
+                >
+                  Request project like this <ArrowRight size={16} />
+                </a>
               </div>
               <div className="phaseColumns">
                 <div>
@@ -359,36 +490,7 @@ export default function Home() {
             <a href={`mailto:${contactEmail}`}>{contactEmail}</a>
           </div>
         </div>
-        <form className="contactForm">
-          <label>
-            Name
-            <input type="text" name="name" placeholder="Your name" />
-          </label>
-          <label>
-            Phone or email
-            <input type="text" name="contact" placeholder="Best way to reach you" />
-          </label>
-          <label>
-            Project type
-            <select name="project">
-              <option>Driveway or parking pad</option>
-              <option>Patio or porch slab</option>
-              <option>Sidewalk or walkway</option>
-              <option>Stamped or decorative concrete</option>
-              <option>Demo, grading, or site prep</option>
-            </select>
-          </label>
-          <label>
-            Details
-            <textarea
-              name="details"
-              placeholder="Approximate size, location, access notes, and timing"
-            />
-          </label>
-          <a className="button formButton" href={estimateHref}>
-            Prepare estimate request <ArrowRight size={17} />
-          </a>
-        </form>
+        <ContactForm />
       </section>
     </main>
   );
