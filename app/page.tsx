@@ -10,6 +10,7 @@ import {
   Shovel,
   Sparkles,
 } from "lucide-react";
+import { HeroSlideshow } from "./HeroSlideshow";
 import { ProjectCoverflow } from "./ProjectCoverflow";
 import projectData from "../public/media/projects/projects.json";
 
@@ -82,6 +83,33 @@ const gallery = [
   },
 ];
 
+const heroSlides = [
+  {
+    src: "/media/projects/shop-apron-slab/after/01-IMG_3048.jpg",
+    alt: "Finished shop apron concrete slab",
+    position: "center 54%",
+    rotation: -0.6,
+  },
+  {
+    src: "/media/projects/large-residential-drive/after/03-IMG_8533.jpg",
+    alt: "Large finished concrete driveway near a residential home",
+    position: "center 42%",
+    rotation: -0.8,
+  },
+  {
+    src: "/media/projects/pool-deck-extension/after/02-IMG_2795.jpg",
+    alt: "Finished concrete walkway beside a pool",
+    position: "center 55%",
+    rotation: 0.9,
+  },
+  {
+    src: "/media/projects/garage-walkway-approach/after/03-IMG_2982.jpg",
+    alt: "Finished curved walkway along a house",
+    position: "center 56%",
+    rotation: -0.7,
+  },
+];
+
 const photoProjects = projectData as PhotoProject[];
 
 const process = [
@@ -110,11 +138,7 @@ export default function Home() {
       </nav>
 
       <section className="hero" id="top">
-        <img
-          className="heroImage"
-          src="/media/projects/large-residential-drive/after/03-IMG_8533.jpg"
-          alt="Large finished concrete driveway near a residential home"
-        />
+        <HeroSlideshow slides={heroSlides} />
         <div className="heroShade" />
         <div className="heroContent">
           <p className="eyebrow">
