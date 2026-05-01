@@ -10,6 +10,7 @@ import {
   Shovel,
   Sparkles,
 } from "lucide-react";
+import { ProjectCoverflow } from "./ProjectCoverflow";
 import projectData from "../public/media/projects/projects.json";
 
 type PhotoProject = {
@@ -198,17 +199,7 @@ export default function Home() {
             there.
           </p>
         </div>
-        <div className="gallery">
-          {gallery.map((item) => (
-            <figure key={item.src} className="galleryItem">
-              <img src={item.src} alt={item.label} loading="lazy" />
-              <figcaption>
-                <span>{item.label}</span>
-                <small>{item.type}</small>
-              </figcaption>
-            </figure>
-          ))}
-        </div>
+        <ProjectCoverflow items={gallery} />
         <div className="projectGroups" aria-label="Before and after projects">
           {photoProjects.map((project) => (
             <article className="projectCard" key={project.slug}>
@@ -217,7 +208,9 @@ export default function Home() {
                   <span>{project.type}</span>
                   <h3>{project.title}</h3>
                 </div>
-                <a href={`#${project.slug}`}>View project</a>
+                <a className="button projectButton" href={`#${project.slug}`}>
+                  View project
+                </a>
               </div>
               <div className="phaseColumns" id={project.slug}>
                 {project.before.length > 0 ? (
@@ -361,7 +354,7 @@ export default function Home() {
               placeholder="Approximate size, location, access notes, and timing"
             />
           </label>
-          <a className="formButton" href={estimateHref}>
+          <a className="button formButton" href={estimateHref}>
             Prepare estimate request <ArrowRight size={17} />
           </a>
         </form>

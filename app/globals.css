@@ -214,14 +214,18 @@ p {
 }
 
 .button,
-.contactForm button {
+.contactForm button,
+.formButton,
+.projectButton,
+.contactDirect a,
+.coverflowControl {
   display: inline-flex;
   align-items: center;
   justify-content: center;
   gap: 8px;
   min-height: 46px;
   border: 1px solid transparent;
-  border-radius: 8px;
+  border-radius: 999px;
   padding: 0 18px;
   font-size: 14px;
   font-weight: 520;
@@ -229,7 +233,8 @@ p {
 }
 
 .button.primary,
-.contactForm button {
+.contactForm button,
+.formButton {
   background: linear-gradient(135deg, var(--safety), #ff8a3d);
   color: #160906;
   box-shadow: 0 12px 28px rgba(168, 79, 42, 0.22);
@@ -239,6 +244,29 @@ p {
   border-color: rgba(223, 232, 217, 0.38);
   color: var(--white);
   background: rgba(24, 63, 49, 0.42);
+}
+
+h1,
+h2,
+h3 {
+  animation: titleIn 700ms ease both;
+  animation-timeline: view();
+  animation-range: entry 0% cover 34%;
+}
+
+.hero h1 {
+  animation-timeline: auto;
+}
+
+@keyframes titleIn {
+  from {
+    opacity: 0;
+    transform: translateY(18px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 .quickStats {
@@ -351,48 +379,73 @@ p {
   margin-top: 28px;
 }
 
-.gallery {
-  display: grid;
-  grid-template-columns: repeat(6, 1fr);
-  gap: 14px;
-}
-
-.galleryItem {
-  position: relative;
-  min-height: 330px;
-  margin: 0;
+.coverflowMask {
+  display: flex;
+  justify-content: center;
+  margin: 18px calc(clamp(18px, 5vw, 72px) * -1) 0;
   overflow: hidden;
-  border-radius: 8px;
+  mask-image: linear-gradient(to right, transparent 5%, black 18%, black 82%, transparent 95%);
+  -webkit-mask-image: linear-gradient(to right, transparent 5%, black 18%, black 82%, transparent 95%);
+}
+
+.coverflowFrame {
+  position: relative;
+  display: grid;
+  grid-template-columns: 48px minmax(0, 1fr) 48px;
+  align-items: center;
+  width: min(1180px, 100vw);
+  min-height: 470px;
+  perspective: 1000px;
+}
+
+.coverflowCarousel {
+  position: relative;
+  height: 410px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.coverflowSlide {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  pointer-events: none;
+  transition:
+    transform 520ms cubic-bezier(0.2, 0.8, 0.2, 1),
+    opacity 320ms ease;
+  transform:
+    translateX(calc(var(--offset) * 230px))
+    rotateY(calc(var(--offset) * -18deg))
+    scale(calc(1 - min(var(--abs-offset), 3) * 0.14));
+  opacity: calc(1 - min(var(--abs-offset), 4) * 0.18);
+}
+
+.coverflowImageButton {
+  position: relative;
+  width: min(440px, 70vw);
+  height: 360px;
+  padding: 0;
+  overflow: hidden;
+  border: 1px solid rgba(223, 232, 217, 0.36);
+  border-radius: 18px;
+  color: var(--white);
   background: var(--pine);
-  box-shadow: 0 22px 48px rgba(13, 42, 32, 0.16);
+  box-shadow: 0 26px 70px rgba(13, 42, 32, 0.3);
+  cursor: pointer;
+  pointer-events: auto;
 }
 
-.galleryItem:nth-child(1),
-.galleryItem:nth-child(6) {
-  grid-column: span 3;
-}
-
-.galleryItem:nth-child(2),
-.galleryItem:nth-child(3),
-.galleryItem:nth-child(4),
-.galleryItem:nth-child(5) {
-  grid-column: span 3;
-}
-
-.galleryItem img {
+.coverflowItem {
   width: 100%;
   height: 100%;
-  min-height: 330px;
   object-fit: cover;
-  filter: saturate(1.05) contrast(1.03);
-  transition: transform 300ms ease;
+  filter: saturate(1.08) contrast(1.04);
+  user-select: none;
 }
 
-.galleryItem:hover img {
-  transform: scale(1.025);
-}
-
-.galleryItem figcaption {
+.coverflowImageButton span {
   position: absolute;
   left: 14px;
   right: 14px;
@@ -400,20 +453,37 @@ p {
   display: flex;
   align-items: end;
   justify-content: space-between;
-  gap: 12px;
-  border: 1px solid rgba(223, 232, 217, 0.32);
-  border-radius: 8px;
-  padding: 12px;
-  color: var(--white);
+  gap: 14px;
+  border: 1px solid rgba(223, 232, 217, 0.3);
+  border-radius: 999px;
+  padding: 10px 14px;
   background: rgba(13, 42, 32, 0.72);
   backdrop-filter: blur(14px);
 }
 
-.galleryItem small {
-  color: rgba(255, 255, 255, 0.7);
+.coverflowImageButton strong {
+  font-size: 14px;
+  text-align: left;
+}
+
+.coverflowImageButton small {
+  color: rgba(255, 255, 255, 0.68);
   font-family: var(--font-geist-mono), monospace;
   font-size: 11px;
   text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.coverflowControl {
+  position: relative;
+  z-index: 30;
+  width: 46px;
+  min-width: 46px;
+  padding: 0;
+  border-color: rgba(24, 63, 49, 0.2);
+  color: var(--white);
+  background: var(--pine);
+  cursor: pointer;
 }
 
 .projectGroups {
@@ -458,16 +528,10 @@ p {
 }
 
 .projectCardHeader a {
-  display: inline-flex;
-  align-items: center;
   min-height: 36px;
   border: 1px solid rgba(24, 63, 49, 0.16);
-  border-radius: 8px;
-  padding: 0 12px;
   background: var(--pine);
   color: var(--white);
-  font-size: 13px;
-  font-weight: 520;
   white-space: nowrap;
 }
 
@@ -643,7 +707,6 @@ p {
 .formButton {
   width: 100%;
   margin-top: 4px;
-  border: 0;
   cursor: pointer;
 }
 
@@ -655,16 +718,10 @@ p {
 }
 
 .contactDirect a {
-  display: inline-flex;
-  align-items: center;
   min-height: 42px;
   border: 1px solid rgba(255, 255, 255, 0.24);
-  border-radius: 8px;
-  padding: 0 14px;
   color: var(--white);
   background: rgba(255, 255, 255, 0.1);
-  font-size: 14px;
-  font-weight: 520;
 }
 
 @media (max-width: 900px) {
@@ -712,13 +769,25 @@ p {
     margin-top: 0;
   }
 
-  .gallery {
-    grid-template-columns: 1fr;
+  .coverflowFrame {
+    grid-template-columns: 42px minmax(0, 1fr) 42px;
+    min-height: 370px;
   }
 
-  .galleryItem,
-  .galleryItem:nth-child(n) {
-    grid-column: auto;
+  .coverflowCarousel {
+    height: 320px;
+  }
+
+  .coverflowSlide {
+    transform:
+      translateX(calc(var(--offset) * 145px))
+      rotateY(calc(var(--offset) * -16deg))
+      scale(calc(1 - min(var(--abs-offset), 3) * 0.14));
+  }
+
+  .coverflowImageButton {
+    width: min(310px, 72vw);
+    height: 280px;
   }
 
   .mediaStrip {
@@ -778,5 +847,15 @@ p {
 
   .phaseGrid {
     grid-template-columns: 1fr;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 1ms !important;
+    scroll-behavior: auto !important;
+    transition-duration: 1ms !important;
   }
 }
