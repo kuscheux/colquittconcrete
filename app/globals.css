@@ -507,6 +507,15 @@ h3 {
   align-items: start;
   justify-content: space-between;
   gap: 18px;
+  cursor: pointer;
+  list-style: none;
+}
+
+.projectCardHeader::-webkit-details-marker {
+  display: none;
+}
+
+.projectCard[open] .projectCardHeader {
   margin-bottom: 18px;
   border-bottom: 1px solid rgba(24, 63, 49, 0.12);
   padding-bottom: 16px;
@@ -527,12 +536,24 @@ h3 {
   margin: 5px 0 0;
 }
 
-.projectCardHeader a {
+.projectButton {
   min-height: 36px;
   border: 1px solid rgba(24, 63, 49, 0.16);
   background: var(--pine);
   color: var(--white);
   white-space: nowrap;
+}
+
+.projectCard[open] .projectButton::before {
+  content: "Close";
+}
+
+.projectCard[open] .projectButton {
+  font-size: 0;
+}
+
+.projectCard[open] .projectButton::before {
+  font-size: 14px;
 }
 
 .phaseColumns {

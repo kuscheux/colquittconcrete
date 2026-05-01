@@ -202,17 +202,15 @@ export default function Home() {
         <ProjectCoverflow items={gallery} />
         <div className="projectGroups" aria-label="Before and after projects">
           {photoProjects.map((project) => (
-            <article className="projectCard" key={project.slug}>
-              <div className="projectCardHeader">
+            <details className="projectCard" key={project.slug} id={project.slug}>
+              <summary className="projectCardHeader">
                 <div>
                   <span>{project.type}</span>
                   <h3>{project.title}</h3>
                 </div>
-                <a className="button projectButton" href={`#${project.slug}`}>
-                  View project
-                </a>
-              </div>
-              <div className="phaseColumns" id={project.slug}>
+                <span className="button projectButton">Open project</span>
+              </summary>
+              <div className="phaseColumns">
                 {project.before.length > 0 ? (
                   <div>
                     <h4>Before</h4>
@@ -242,7 +240,7 @@ export default function Home() {
                   </div>
                 </div>
               </div>
-            </article>
+            </details>
           ))}
         </div>
       </section>
