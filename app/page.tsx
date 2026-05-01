@@ -112,6 +112,29 @@ const heroSlides = [
 
 const photoProjects = projectData as PhotoProject[];
 
+const featuredBeforeAfterSlugs = [
+  "large-residential-drive",
+  "pool-deck-extension",
+  "garage-walkway-approach",
+  "shop-apron-slab",
+];
+
+const featuredBeforeAfterProjects = featuredBeforeAfterSlugs.flatMap((slug) => {
+  const project = photoProjects.find((item) => item.slug === slug);
+
+  if (!project || project.before.length === 0 || project.after.length === 0) {
+    return [];
+  }
+
+  return [
+    {
+      ...project,
+      beforeImage: project.before[0],
+      afterImage: project.after[0],
+    },
+  ];
+});
+
 const process = [
   "Site review and measurements",
   "Demo, grading, and form setup",
@@ -218,53 +241,39 @@ export default function Home() {
             <h2>Recent concrete and outdoor work.</h2>
           </div>
           <p>
-            Finished driveways, slabs, pool deck work, curved walks, stamped
-            surfaces, and the prep photos that show how the finished work got
-            there.
+            A short look at a few common project types, with one before and one
+            after photo for each.
           </p>
         </div>
         <ProjectCoverflow items={gallery} />
         <div className="projectGroups" aria-label="Before and after projects">
-          {photoProjects.map((project) => (
-            <details className="projectCard" key={project.slug} id={project.slug}>
-              <summary className="projectCardHeader">
+          {featuredBeforeAfterProjects.map((project) => (
+            <article className="projectCard" key={project.slug} id={project.slug}>
+              <div className="projectCardHeader">
                 <div>
                   <span>{project.type}</span>
                   <h3>{project.title}</h3>
                 </div>
-                <span className="button projectButton">Open project</span>
-              </summary>
+              </div>
               <div className="phaseColumns">
-                {project.before.length > 0 ? (
-                  <div>
-                    <h4>Before</h4>
-                    <div className="phaseGrid">
-                      {project.before.slice(0, 4).map((src) => (
-                        <img
-                          key={src}
-                          src={src}
-                          alt={`${project.title} before`}
-                          loading="lazy"
-                        />
-                      ))}
-                    </div>
-                  </div>
-                ) : null}
+                <div>
+                  <h4>Before</h4>
+                  <img
+                    src={project.beforeImage}
+                    alt={`${project.title} before`}
+                    loading="lazy"
+                  />
+                </div>
                 <div>
                   <h4>After</h4>
-                  <div className="phaseGrid">
-                    {project.after.slice(0, 4).map((src) => (
-                      <img
-                        key={src}
-                        src={src}
-                        alt={`${project.title} after`}
-                        loading="lazy"
-                      />
-                    ))}
-                  </div>
+                  <img
+                    src={project.afterImage}
+                    alt={`${project.title} after`}
+                    loading="lazy"
+                  />
                 </div>
               </div>
-            </details>
+            </article>
           ))}
         </div>
       </section>
