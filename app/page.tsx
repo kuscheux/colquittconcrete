@@ -15,6 +15,7 @@ import { HeroSlideshow } from "./HeroSlideshow";
 import { ProjectCoverflow } from "./ProjectCoverflow";
 import {
   businessName,
+  businessLogo,
   contactEmail,
   contactPhone,
   contactPhoneInternational,
@@ -212,7 +213,7 @@ const structuredData = {
       email: contactEmail,
       telephone: contactPhoneInternational,
       image: `${siteUrl}${defaultOgImage}`,
-      logo: `${siteUrl}/favicon.svg`,
+      logo: `${siteUrl}${businessLogo}`,
       description: siteDescription,
       priceRange: "$$",
       areaServed: [
@@ -272,7 +273,9 @@ export default function Home() {
       />
       <nav className="nav" aria-label="Main navigation">
         <a className="brand" href="#top" aria-label="Colquitt Concrete home">
-          <span className="brandMark">CC</span>
+          <span className="brandMark" aria-hidden="true">
+            <img src={businessLogo} alt="" />
+          </span>
           <span>
             Colquitt Concrete
             <small>Outdoor Solutions</small>

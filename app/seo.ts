@@ -14,6 +14,8 @@ export const siteDescription =
 export const defaultOgImage =
   "/media/projects/shop-apron-slab/after/01-IMG_3048.jpg";
 
+export const businessLogo = "/brand-logo.svg";
+
 export const serviceKeywords = [
   "Colquitt Concrete",
   "Colquitt Concrete and Outdoor Solutions",

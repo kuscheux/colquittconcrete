@@ -4,6 +4,7 @@ import { GeistMono } from "geist/font/mono";
 import "./globals.css";
 import {
   businessName,
+  businessLogo,
   contactEmail,
   contactPhoneInternational,
   defaultOgImage,
@@ -71,7 +72,7 @@ export const metadata: Metadata = {
   },
   classification: serviceNames.join(", "),
   icons: {
-    icon: "/favicon.svg",
+    icon: businessLogo,
   },
 };
 

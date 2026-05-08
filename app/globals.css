@@ -98,14 +98,19 @@ textarea {
 
 .brandMark {
   display: grid;
-  width: 42px;
-  height: 42px;
+  width: 48px;
+  height: 48px;
   place-items: center;
-  border: 1px solid rgba(255, 255, 255, 0.42);
-  border-radius: 8px;
-  background: rgba(255, 255, 255, 0.12);
-  font-family: var(--font-geist-mono), monospace;
-  font-size: 13px;
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.28);
+  border-radius: 10px;
+  background: #0b0705;
+}
+
+.brandMark img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }
 
 .navLinks {
