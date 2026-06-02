@@ -269,11 +269,11 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
               <Search size={15} />
               Project proof
             </p>
-            <h2>Actual photos tied to a crawlable project page.</h2>
+            <h2>Before, after, and jobsite photos.</h2>
           </div>
           <p>
-            This page gives customers and search engines a concrete example of
-            the work, with project-specific metadata and photo descriptions.
+            See the kind of prep, layout, forming, and finish details that go
+            into this type of concrete work.
           </p>
         </div>
 
@@ -287,7 +287,7 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
               </li>
               <li>
                 <Check size={16} />
-                <span>Unique project title, description, and canonical URL.</span>
+                <span>Clear example of this concrete project type.</span>
               </li>
               <li>
                 <Check size={16} />
@@ -295,12 +295,12 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
               </li>
               <li>
                 <Check size={16} />
-                <span>Project schema, image schema, and breadcrumbs.</span>
+                <span>Photos labeled by phase and surface type.</span>
               </li>
             </ul>
           </article>
           <article className="listPanel">
-            <h3>Keyword targets</h3>
+            <h3>Related work</h3>
             <div className="keywordPills">
               {project.keywordTargets.map((keyword) => (
                 <span key={keyword}>{keyword}</span>

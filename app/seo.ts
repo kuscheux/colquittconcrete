@@ -50,7 +50,7 @@ export const servicePages: SeoServicePage[] = [
     summary:
       "New concrete pours, widened drives, parking pads, clean control joints, and broom-finished surfaces built for daily use.",
     intro:
-      "Concrete driveways need the right layout, base prep, forms, reinforcement, drainage, and finish. This page gives Google and customers a clear service target for driveway and parking pad work in Georgia.",
+      "Concrete driveways need the right layout, base prep, forms, reinforcement, drainage, and finish. The goal is a durable surface that fits the property and stands up to daily use.",
     image: "/media/projects/large-residential-drive/after/03-IMG_8533.jpg",
     imageAlt:
       "Large finished residential concrete driveway by Colquitt Concrete in Georgia",
@@ -87,7 +87,7 @@ export const servicePages: SeoServicePage[] = [
     summary:
       "Shop aprons, garage pads, basement pads, porch slabs, utility pads, and flatwork built from prep through finish.",
     intro:
-      "A slab is only as good as the prep under it. This service page targets slab and pad searches while explaining the form, base, reinforcement, and finish work customers expect.",
+      "A slab is only as good as the prep under it. Forms, base preparation, reinforcement, slope, and finish all matter before the concrete truck arrives.",
     image: "/media/projects/shop-apron-slab/after/01-IMG_3048.jpg",
     imageAlt:
       "Finished shop apron concrete slab and outdoor pad by Colquitt Concrete",
@@ -124,7 +124,7 @@ export const servicePages: SeoServicePage[] = [
     summary:
       "Backyard patios, porch slabs, curved walkways, front entries, and smooth transitions around homes.",
     intro:
-      "Patios, sidewalks, and walkways are small enough to look simple but important enough to affect drainage, access, and daily use. This page creates a clean organic target for those searches.",
+      "Patios, sidewalks, and walkways are small enough to look simple but important enough to affect drainage, access, and daily use around the property.",
     image: "/media/projects/rear-patio-walk/after/01-IMG_3618.jpg",
     imageAlt:
       "Finished rear patio and concrete walkway around a Georgia home",
@@ -161,7 +161,7 @@ export const servicePages: SeoServicePage[] = [
     summary:
       "Pool deck extensions, poolside walkways, and outdoor concrete surfaces shaped around fencing, slopes, and access.",
     intro:
-      "Pool deck work needs clean edges, predictable slopes, and careful access around the pool area. This page makes that service visible as its own search target.",
+      "Pool deck work needs clean edges, predictable slopes, and careful access around the pool area so the finished space is practical and easy to use.",
     image: "/media/projects/pool-deck-extension/after/02-IMG_2795.jpg",
     imageAlt:
       "Finished concrete pool deck extension beside a backyard pool in Georgia",
@@ -198,7 +198,7 @@ export const servicePages: SeoServicePage[] = [
     summary:
       "Stamped, patterned, and decorative concrete finishes for outdoor surfaces that need more visual character.",
     intro:
-      "Decorative concrete gives customers a clear finish option beyond plain flatwork. This page targets stamped and patterned concrete searches without overpromising a style that is not shown in the work.",
+      "Decorative concrete gives customers a finish option beyond plain flatwork while still depending on the same careful prep, layout, and finishing process.",
     image: "/media/projects/stamped-patio/after/03-IMG_2696.jpg",
     imageAlt:
       "Stamped decorative concrete finish installed by Colquitt Concrete",
@@ -235,7 +235,7 @@ export const servicePages: SeoServicePage[] = [
     summary:
       "Concrete tear-outs, broken slab removal, replacement preparation, and rebuilds handled before the new pour.",
     intro:
-      "Many concrete jobs start with removing old or failed material. This page gives demolition and replacement work its own search signal instead of burying it under general concrete services.",
+      "Many concrete jobs start with removing old or failed material. Clean demolition and prep help the replacement pour start with the right base and layout.",
     image: "/media/projects/shop-apron-slab/before/02-IMG_3038.jpg",
     imageAlt:
       "Concrete demolition and site preparation before a replacement slab",

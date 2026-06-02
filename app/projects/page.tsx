@@ -15,7 +15,7 @@ export const metadata: Metadata = {
     absolute: `Georgia Concrete Project Gallery | ${businessName}`,
   },
   description:
-    "Real Colquitt Concrete project pages with driveway, slab, pool deck, patio, walkway, stamped concrete, demolition, and site prep photos.",
+    "Real Colquitt Concrete project gallery with driveway, slab, pool deck, patio, walkway, stamped concrete, demolition, and site prep photos.",
   alternates: {
     canonical: "/projects",
   },
@@ -36,7 +36,7 @@ const structuredData = {
       name: `Georgia Concrete Project Gallery | ${businessName}`,
       url: `${siteUrl}/projects`,
       description:
-        "Real Colquitt Concrete project pages with concrete driveway, slab, pool deck, patio, walkway, stamped concrete, demolition, and site prep photos.",
+        "Real Colquitt Concrete project gallery with concrete driveway, slab, pool deck, patio, walkway, stamped concrete, demolition, and site prep photos.",
       inLanguage: "en-US",
       about: {
         "@id": `${siteUrl}/#business`,
@@ -48,7 +48,7 @@ const structuredData = {
     {
       "@type": "ItemList",
       "@id": `${siteUrl}/projects#project-list`,
-      name: "Concrete project pages",
+      name: "Concrete projects",
       itemListElement: projectSeoPages.map((project, index) => ({
         "@type": "ListItem",
         position: index + 1,
@@ -108,13 +108,13 @@ export default function ProjectsPage() {
         <div>
           <p className="eyebrow">
             <Camera size={15} />
-            {serviceAreaName} concrete project pages
+            {serviceAreaName} concrete work
           </p>
-          <h1>Real project pages for real concrete work.</h1>
+          <h1>Recent concrete projects.</h1>
           <p className="heroCopy">
-            Every project page gives customers and search engines a clearer look
-            at the work: the surface type, before/after photos, project proof,
-            and an estimate path.
+            Browse real driveways, slabs, pool decks, patios, walkways, and
+            decorative concrete work completed with practical prep and clean
+            finish details.
           </p>
           <div className="heroActions">
             <a className="button primary" href="/#contact">
@@ -132,13 +132,13 @@ export default function ProjectsPage() {
           <div>
             <p className="eyebrow dark">
               <MapPin size={15} />
-              Project SEO layer
+              Project gallery
             </p>
-            <h2>One crawlable page per concrete job type.</h2>
+            <h2>A closer look at the work.</h2>
           </div>
           <p>
-            These are not fake landing pages. They are real project pages built
-            from the actual before and after photo library.
+            These examples are built from the actual project photo library, with
+            finished work and before-and-after views where available.
           </p>
         </div>
         <div className="projectDirectoryGrid">
@@ -155,7 +155,7 @@ export default function ProjectsPage() {
                 <h3>{project.title}</h3>
                 <p>{project.summary}</p>
                 <a className="button serviceLink" href={project.path}>
-                  Open project page <ArrowRight size={15} />
+                  View project <ArrowRight size={15} />
                 </a>
               </div>
             </article>

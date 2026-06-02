@@ -13,7 +13,7 @@ import {
 export const metadata: Metadata = {
   title: "Georgia Concrete Services",
   description:
-    "Concrete service pages for driveways, slabs, patios, walkways, pool decks, stamped concrete, demolition, grading, and site prep in Georgia.",
+    "Concrete services for driveways, slabs, patios, walkways, pool decks, stamped concrete, demolition, grading, and site prep in Georgia.",
   alternates: {
     canonical: "/services",
   },
@@ -34,7 +34,7 @@ const structuredData = {
       name: `Georgia Concrete Services | ${businessName}`,
       url: `${siteUrl}/services`,
       description:
-        "Concrete service pages for driveways, slabs, patios, walkways, pool decks, stamped concrete, demolition, grading, and site prep in Georgia.",
+        "Concrete services for driveways, slabs, patios, walkways, pool decks, stamped concrete, demolition, grading, and site prep in Georgia.",
       inLanguage: "en-US",
       about: {
         "@id": `${siteUrl}/#business`,
@@ -46,7 +46,7 @@ const structuredData = {
     {
       "@type": "ItemList",
       "@id": `${siteUrl}/services#service-list`,
-      name: "Georgia concrete service pages",
+      name: "Georgia concrete services",
       itemListElement: servicePages.map((service, index) => ({
         "@type": "ListItem",
         position: index + 1,
@@ -106,12 +106,12 @@ export default function ServicesPage() {
         <div>
           <p className="eyebrow">
             <MapPin size={15} />
-            {serviceAreaName} organic service pages
+            {serviceAreaName} concrete services
           </p>
-          <h1>Concrete services built into search-friendly pages.</h1>
+          <h1>Concrete services for real outdoor work.</h1>
           <p className="heroCopy">
-            Each service has its own clear URL, page title, description,
-            keyword targets, structured data, and estimate path.
+            Driveways, slabs, patios, walkways, pool decks, stamped concrete,
+            demolition, grading, and site prep handled from layout to finish.
           </p>
           <div className="heroActions">
             <a className="button primary" href="/#contact">
@@ -129,13 +129,13 @@ export default function ServicesPage() {
           <div>
             <p className="eyebrow dark">
               <Sparkles size={15} />
-              Organic SEO targets
+              Services
             </p>
-            <h2>Dedicated pages for the work customers search for.</h2>
+            <h2>Choose the type of concrete work you need.</h2>
           </div>
           <p>
-            These pages are designed to help Google understand the business by
-            actual service category instead of relying on one generic homepage.
+            Each service gives a clearer look at the work, the kind of prep
+            involved, and the photos that match that project type.
           </p>
         </div>
         <div className="servicePageGrid">
@@ -146,7 +146,7 @@ export default function ServicesPage() {
                 <h3>{service.cardTitle}</h3>
                 <p>{service.summary}</p>
                 <a className="button serviceLink" href={service.path}>
-                  Open service page <ArrowRight size={15} />
+                  View service <ArrowRight size={15} />
                 </a>
               </div>
             </article>

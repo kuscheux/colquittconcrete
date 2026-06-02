@@ -376,7 +376,7 @@ export default function Home() {
                 <h3>{service.cardTitle}</h3>
                 <p>{service.summary}</p>
                 <a className="button serviceLink" href={service.path}>
-                  View service page <ArrowRight size={15} />
+                  View service <ArrowRight size={15} />
                 </a>
               </div>
             </article>
@@ -418,7 +418,7 @@ export default function Home() {
                     className="button projectRequestButton"
                     href={`/projects/${project.slug}`}
                   >
-                    Full project page <ArrowRight size={16} />
+                    View project <ArrowRight size={16} />
                   </a>
                 </div>
               </div>
@@ -453,7 +453,7 @@ export default function Home() {
         </div>
         <div className="workFooterAction">
           <a className="button primary" href="/projects">
-            View all project SEO pages <ArrowRight size={17} />
+            Browse more projects <ArrowRight size={17} />
           </a>
         </div>
       </section>

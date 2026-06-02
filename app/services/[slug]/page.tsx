@@ -267,13 +267,13 @@ export default async function ServicePage({ params }: ServicePageProps) {
           <div>
             <p className="eyebrow dark">
               <Search size={15} />
-              Organic search signals
+              Project fit
             </p>
-            <h2>What this page tells Google and customers.</h2>
+            <h2>What to know before requesting this work.</h2>
           </div>
           <p>
-            The page title, meta description, visible content, image alt text,
-            structured data, and estimate subject all match this service.
+            The right concrete job starts with the layout, access, grade,
+            surface use, and finish expectations.
           </p>
         </div>
 
@@ -291,7 +291,7 @@ export default async function ServicePage({ params }: ServicePageProps) {
           </article>
 
           <article className="listPanel">
-            <h3>Keyword targets</h3>
+            <h3>Common related work</h3>
             <div className="keywordPills">
               {service.keywordTargets.map((keyword) => (
                 <span key={keyword}>{keyword}</span>
