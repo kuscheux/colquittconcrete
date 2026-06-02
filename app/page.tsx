@@ -20,7 +20,9 @@ import {
   contactPhone,
   contactPhoneInternational,
   defaultOgImage,
-  serviceNames,
+  organicSeoTargets,
+  serviceAreaName,
+  servicePages,
   siteDescription,
   siteUrl,
 } from "./seo";
@@ -34,59 +36,42 @@ type PhotoProject = {
   after: string[];
 };
 
-const services = [
-  {
-    title: "Driveways and parking pads",
-    text: "New concrete pours, widened drives, clean control joints, and broom-finished surfaces built for daily use.",
-    image: "/media/projects/large-residential-drive/after/03-IMG_8533.jpg",
-  },
-  {
-    title: "Patios, porches, and walkways",
-    text: "Backyard pads, curved patio extensions, front entries, porch slabs, and smooth transitions around homes.",
-    image: "/media/projects/rear-patio-walk/after/01-IMG_3618.jpg",
-  },
-  {
-    title: "Stamped and patterned concrete",
-    text: "Decorative hex-pattern concrete for sidewalks, public paths, and custom outdoor surfaces.",
-    image: "/media/projects/stamped-patio/after/01-4917369409842734588-10.jpg",
-  },
-  {
-    title: "Demo, prep, and rebuilds",
-    text: "Concrete removal, excavation, forms, base preparation, reinforcement, and replacement pours.",
-    image: "/media/projects/shop-apron-slab/before/02-IMG_3038.jpg",
-  },
-];
-
 const gallery = [
   {
     src: "/media/projects/backyard-driveway-slab/after/02-IMG_1995.jpg",
     label: "Large backyard slab",
     type: "Driveway",
+    alt: "Finished large backyard concrete slab and driveway pad by Colquitt Concrete",
   },
   {
     src: "/media/projects/side-driveway-extension/after/01-IMG_2206.jpg",
     label: "Side driveway extension",
     type: "Patio",
+    alt: "Finished side driveway concrete extension beside a Georgia home",
   },
   {
     src: "/media/projects/stamped-patio/after/03-IMG_2696.jpg",
     label: "Stamped finish",
     type: "Decorative",
+    alt: "Stamped decorative concrete finish by Colquitt Concrete",
   },
   {
     src: "/media/projects/curved-walkway/after/03-IMG_5144.jpg",
     label: "Curved concrete approach",
     type: "Walkway",
+    alt: "Curved finished concrete walkway and approach along a residential property",
   },
   {
     src: "/media/projects/pool-deck-extension/after/02-IMG_2795.jpg",
     label: "Pool deck extension",
     type: "Slab",
+    alt: "Finished concrete pool deck extension and poolside walkway",
   },
   {
     src: "/media/projects/shop-apron-slab/after/01-IMG_3048.jpg",
     label: "Shop apron slab",
     type: "Site work",
+    alt: "Finished shop apron concrete slab and outdoor concrete pad",
   },
 ];
 
@@ -196,6 +181,17 @@ const structuredData = {
       primaryImageOfPage: {
         "@id": `${siteUrl}/#primaryimage`,
       },
+      mainEntity: [
+        {
+          "@id": `${siteUrl}/#business`,
+        },
+        {
+          "@id": `${siteUrl}/#service-catalog`,
+        },
+        {
+          "@id": `${siteUrl}/#project-gallery`,
+        },
+      ],
       inLanguage: "en-US",
     },
     {
@@ -216,11 +212,10 @@ const structuredData = {
       logo: `${siteUrl}${businessLogo}`,
       description: siteDescription,
       priceRange: "$$",
-      areaServed: [
-        "Residential concrete customers",
-        "Light commercial concrete customers",
-        "Local outdoor concrete project sites",
-      ],
+      areaServed: {
+        "@type": "State",
+        name: serviceAreaName,
+      },
       contactPoint: [
         {
           "@type": "ContactPoint",
@@ -230,22 +225,46 @@ const structuredData = {
           availableLanguage: "English",
         },
       ],
-      knowsAbout: serviceNames,
+      knowsAbout: organicSeoTargets,
       hasOfferCatalog: {
         "@type": "OfferCatalog",
+        "@id": `${siteUrl}/#service-catalog`,
         name: "Concrete and outdoor construction services",
-        itemListElement: serviceNames.map((serviceName) => ({
+        itemListElement: servicePages.map((service) => ({
           "@type": "Offer",
+          name: service.title,
+          url: `${siteUrl}${service.path}`,
           itemOffered: {
             "@type": "Service",
-            name: serviceName,
+            name: service.title,
+            serviceType: service.serviceType,
+            description: service.metaDescription,
+            areaServed: {
+              "@type": "State",
+              name: serviceAreaName,
+            },
             provider: {
               "@id": `${siteUrl}/#business`,
             },
-            areaServed: "Local service area",
           },
         })),
       },
+    },
+    {
+      "@type": "ItemList",
+      "@id": `${siteUrl}/#project-gallery`,
+      name: "Concrete project photo examples",
+      itemListElement: gallery.map((item, index) => ({
+        "@type": "ListItem",
+        position: index + 1,
+        item: {
+          "@type": "ImageObject",
+          name: item.label,
+          description: item.alt,
+          contentUrl: `${siteUrl}${item.src}`,
+          caption: `${item.label} - ${item.type}`,
+        },
+      })),
     },
     {
       "@type": "BreadcrumbList",
@@ -299,7 +318,8 @@ export default function Home() {
           <h1>Colquitt Concrete and Outdoor Solutions</h1>
           <p className="heroCopy">
             Driveways, slabs, patios, sidewalks, decorative concrete, demo, and
-            site prep handled by a crew that knows the work from dirt to finish.
+            site prep across Georgia handled by a crew that knows the work from
+            dirt to finish.
           </p>
           <div className="heroActions">
             <a className="button primary" href="#contact">
@@ -347,12 +367,15 @@ export default function Home() {
           </p>
         </div>
         <div className="serviceGrid">
-          {services.map((service) => (
+          {servicePages.map((service) => (
             <article className="serviceCard" key={service.title}>
-              <img src={service.image} alt="" loading="lazy" />
+              <img src={service.image} alt={service.imageAlt} loading="lazy" />
               <div>
-                <h3>{service.title}</h3>
-                <p>{service.text}</p>
+                <h3>{service.cardTitle}</h3>
+                <p>{service.summary}</p>
+                <a className="button serviceLink" href={service.path}>
+                  View service page <ArrowRight size={15} />
+                </a>
               </div>
             </article>
           ))}

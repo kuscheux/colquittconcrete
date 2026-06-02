@@ -8,6 +8,8 @@ import {
   contactEmail,
   contactPhoneInternational,
   defaultOgImage,
+  serviceAreaName,
+  serviceAreaRegion,
   serviceKeywords,
   serviceNames,
   siteDescription,
@@ -18,7 +20,7 @@ export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
   applicationName: businessName,
   title: {
-    default: businessName,
+    default: `Georgia Concrete Contractor | ${businessName}`,
     template: `%s | ${businessName}`,
   },
   description: siteDescription,
@@ -50,7 +52,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: businessName,
+    title: `Georgia Concrete Contractor | ${businessName}`,
     description: siteDescription,
     images: [defaultOgImage],
   },
@@ -73,6 +75,14 @@ export const metadata: Metadata = {
   classification: serviceNames.join(", "),
   icons: {
     icon: businessLogo,
+    apple: businessLogo,
+  },
+  manifest: "/site.webmanifest",
+  other: {
+    "geo.region": serviceAreaRegion,
+    "geo.placename": serviceAreaName,
+    "business:contact_data:country_name": "United States",
+    "business:contact_data:region": serviceAreaName,
   },
 };
 

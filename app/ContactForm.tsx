@@ -53,10 +53,13 @@ export function ContactForm() {
         Project type
         <select name="project" defaultValue="Driveway or parking pad">
           <option>Driveway or parking pad</option>
+          <option>Concrete slab or pad</option>
           <option>Patio or porch slab</option>
           <option>Sidewalk or walkway</option>
+          <option>Pool deck concrete</option>
           <option>Stamped or decorative concrete</option>
-          <option>Demo, grading, or site prep</option>
+          <option>Concrete demolition or removal</option>
+          <option>Grading, forms, or site prep</option>
         </select>
       </label>
       <label>

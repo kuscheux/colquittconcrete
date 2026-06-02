@@ -8,6 +8,7 @@ type CoverflowItem = {
   src: string;
   label: string;
   type: string;
+  alt: string;
 };
 
 export function ProjectCoverflow({ items }: { items: CoverflowItem[] }) {
@@ -72,7 +73,7 @@ export function ProjectCoverflow({ items }: { items: CoverflowItem[] }) {
                 <img
                   draggable={false}
                   src={item.src}
-                  alt={item.label}
+                  alt={item.alt}
                   className="coverflowItem"
                 />
                 <span>

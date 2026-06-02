@@ -1,0 +1,17 @@
+{
+  "name": "Colquitt Concrete and Outdoor Solutions",
+  "short_name": "Colquitt Concrete",
+  "description": "Georgia concrete contractor for driveways, slabs, patios, sidewalks, stamped concrete, demolition, grading, and site prep.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#0f0f0e",
+  "theme_color": "#111111",
+  "icons": [
+    {
+      "src": "/brand-logo.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}
