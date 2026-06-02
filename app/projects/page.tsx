@@ -144,7 +144,12 @@ export default function ProjectsPage() {
         <div className="projectDirectoryGrid">
           {projectSeoPages.map((project) => (
             <article className="projectTile" key={project.slug}>
-              <img src={project.afterImage} alt={project.imageAlt} loading="lazy" />
+              <img
+                src={project.afterImage}
+                alt={project.imageAlt}
+                title={project.photoMeta.find((photo) => photo.src === project.afterImage)?.title}
+                loading="lazy"
+              />
               <div>
                 <span>{project.type}</span>
                 <h3>{project.title}</h3>

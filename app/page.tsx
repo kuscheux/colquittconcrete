@@ -13,7 +13,7 @@ import {
 import { ContactForm } from "./ContactForm";
 import { HeroSlideshow } from "./HeroSlideshow";
 import { ProjectCoverflow } from "./ProjectCoverflow";
-import { photoProjects, projectSeoPages, type PhotoProject } from "./project-data";
+import { projectSeoPages, type PhotoProject } from "./project-data";
 import {
   businessName,
   businessLogo,
@@ -102,17 +102,17 @@ const featuredBeforeAfterSlugs = [
 ];
 
 const featuredBeforeAfterProjects = featuredBeforeAfterSlugs.flatMap((slug) => {
-  const project = photoProjects.find((item) => item.slug === slug);
+  const project = projectSeoPages.find((item) => item.slug === slug);
 
-  if (!project || project.before.length === 0 || project.after.length === 0) {
+  if (!project || !project.beforeImage || !project.afterImage) {
     return [];
   }
 
   return [
     {
       ...project,
-      beforeImage: project.before[0],
-      afterImage: project.after[0],
+      beforeImageMeta: project.photoMeta.find((photo) => photo.src === project.beforeImage),
+      afterImageMeta: project.photoMeta.find((photo) => photo.src === project.afterImage),
     },
   ];
 });
@@ -427,7 +427,11 @@ export default function Home() {
                   <h4>Before</h4>
                   <img
                     src={project.beforeImage}
-                    alt={`${project.title} before`}
+                    alt={
+                      project.beforeImageMeta?.alt ??
+                      `${project.title} before concrete work`
+                    }
+                    title={project.beforeImageMeta?.title}
                     loading="lazy"
                   />
                 </div>
@@ -435,7 +439,11 @@ export default function Home() {
                   <h4>After</h4>
                   <img
                     src={project.afterImage}
-                    alt={`${project.title} after`}
+                    alt={
+                      project.afterImageMeta?.alt ??
+                      `${project.title} after finished concrete work`
+                    }
+                    title={project.afterImageMeta?.title}
                     loading="lazy"
                   />
                 </div>

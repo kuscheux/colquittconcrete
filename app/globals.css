@@ -887,13 +887,28 @@ h3 {
   margin-top: 18px;
 }
 
+.projectPhotoGrid figure {
+  margin: 0;
+  overflow: hidden;
+  border-radius: 8px;
+  background: var(--surface);
+  box-shadow: 0 12px 24px var(--shadow);
+}
+
 .projectPhotoGrid img {
   width: 100%;
   aspect-ratio: 1.22;
-  border-radius: 8px;
   object-fit: cover;
   background: var(--inverse);
-  box-shadow: 0 12px 24px var(--shadow);
+}
+
+.projectPhotoGrid figcaption {
+  min-height: 44px;
+  padding: 10px 12px;
+  color: var(--muted);
+  font-family: var(--font-geist-mono), monospace;
+  font-size: 11px;
+  line-height: 1.35;
 }
 
 .process {

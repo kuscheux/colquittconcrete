@@ -100,7 +100,12 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
   }
 
   const estimateHref = getProjectEstimateHref(project);
-  const visibleImages = [...project.before.slice(0, 2), ...project.after.slice(0, 4)];
+  const beforeImageMeta = project.photoMeta.find(
+    (photo) => photo.src === project.beforeImage
+  );
+  const afterImageMeta = project.photoMeta.find(
+    (photo) => photo.src === project.afterImage
+  );
   const structuredData = {
     "@context": "https://schema.org",
     "@graph": [
@@ -120,6 +125,9 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
         primaryImageOfPage: {
           "@id": `${siteUrl}${project.path}#primaryimage`,
         },
+        mainEntity: {
+          "@id": `${siteUrl}${project.path}#project`,
+        },
       },
       {
         "@type": "CreativeWork",
@@ -127,8 +135,11 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
         name: project.title,
         headline: project.metaTitle,
         description: project.metaDescription,
-        image: project.after.map((image) => `${siteUrl}${image}`),
+        image: project.photoMeta.map((photo) => `${siteUrl}${photo.src}`),
         about: project.keywordTargets,
+        hasPart: project.photoMeta.map((photo) => ({
+          "@id": `${siteUrl}${project.path}#image-${photo.phase}-${photo.index}`,
+        })),
         creator: {
           "@id": `${siteUrl}/#business`,
         },
@@ -147,6 +158,29 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
         contentUrl: `${siteUrl}${project.afterImage}`,
         caption: project.imageAlt,
       },
+      {
+        "@type": "ItemList",
+        "@id": `${siteUrl}${project.path}#project-images`,
+        name: `${project.title} concrete project photos`,
+        itemListElement: project.photoMeta.map((photo, index) => ({
+          "@type": "ListItem",
+          position: index + 1,
+          item: {
+            "@id": `${siteUrl}${project.path}#image-${photo.phase}-${photo.index}`,
+          },
+        })),
+      },
+      ...project.photoMeta.map((photo) => ({
+        "@type": "ImageObject",
+        "@id": `${siteUrl}${project.path}#image-${photo.phase}-${photo.index}`,
+        name: photo.title,
+        url: `${siteUrl}${photo.src}`,
+        contentUrl: `${siteUrl}${photo.src}`,
+        caption: photo.caption,
+        description: photo.alt,
+        keywords: [...project.keywordTargets, ...photo.keywords].join(", "),
+        representativeOfPage: photo.src === project.afterImage,
+      })),
       {
         "@type": "BreadcrumbList",
         "@id": `${siteUrl}${project.path}#breadcrumbs`,
@@ -221,7 +255,11 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
             </a>
           </div>
         </div>
-        <img src={project.heroImage} alt={project.imageAlt} />
+        <img
+          src={project.heroImage}
+          alt={project.imageAlt}
+          title={afterImageMeta?.title}
+        />
       </section>
 
       <section className="section projectDetailBody">
@@ -277,7 +315,8 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
               <h3>Before</h3>
               <img
                 src={project.beforeImage}
-                alt={`${project.title} before concrete work`}
+                alt={beforeImageMeta?.alt ?? `${project.title} before concrete work`}
+                title={beforeImageMeta?.title}
                 loading="lazy"
               />
             </div>
@@ -285,7 +324,8 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
               <h3>After</h3>
               <img
                 src={project.afterImage}
-                alt={`${project.title} after finished concrete work`}
+                alt={afterImageMeta?.alt ?? `${project.title} after finished concrete work`}
+                title={afterImageMeta?.title}
                 loading="lazy"
               />
             </div>
@@ -293,13 +333,16 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
         ) : null}
 
         <div className="projectPhotoGrid" aria-label={`${project.title} photos`}>
-          {visibleImages.map((image, index) => (
-            <img
-              key={image}
-              src={image}
-              alt={`${project.title} project photo ${index + 1}`}
-              loading="lazy"
-            />
+          {project.photoMeta.map((photo) => (
+            <figure key={photo.src}>
+              <img
+                src={photo.src}
+                alt={photo.alt}
+                title={photo.title}
+                loading="lazy"
+              />
+              <figcaption>{photo.caption}</figcaption>
+            </figure>
           ))}
         </div>
       </section>
