@@ -42,6 +42,13 @@ function getEstimateHref(service: (typeof servicePages)[number]) {
   )}&body=${encodeURIComponent(body)}`;
 }
 
+function getFaqItems(service: (typeof servicePages)[number]) {
+  return service.customerSearches.map((question) => ({
+    question,
+    answer: `Yes. Colquitt Concrete can review the project size, access, existing surface, grading, forms, reinforcement, and finish needs for ${service.cardTitle.toLowerCase()} in Georgia, then prepare a practical estimate path.`,
+  }));
+}
+
 export function generateStaticParams() {
   return servicePages.map((service) => ({
     slug: service.slug,
@@ -104,6 +111,7 @@ export default async function ServicePage({ params }: ServicePageProps) {
   }
 
   const estimateHref = getEstimateHref(service);
+  const faqItems = getFaqItems(service);
   const structuredData = {
     "@context": "https://schema.org",
     "@graph": [
@@ -189,6 +197,18 @@ export default async function ServicePage({ params }: ServicePageProps) {
           },
         ],
       },
+      {
+        "@type": "FAQPage",
+        "@id": `${siteUrl}${service.path}#faq`,
+        mainEntity: faqItems.map((item) => ({
+          "@type": "Question",
+          name: item.question,
+          acceptedAnswer: {
+            "@type": "Answer",
+            text: item.answer,
+          },
+        })),
+      },
     ],
   };
 
@@ -213,6 +233,7 @@ export default async function ServicePage({ params }: ServicePageProps) {
         <div className="navLinks">
           <a href="/#services">Services</a>
           <a href="/#work">Work</a>
+          <a href="/projects">Projects</a>
           <a href="/#contact">Contact</a>
         </div>
       </nav>
@@ -281,14 +302,23 @@ export default async function ServicePage({ params }: ServicePageProps) {
           <article className="listPanel">
             <h3>Customer searches this helps answer</h3>
             <ul>
-              {service.customerSearches.map((search) => (
-                <li key={search}>
+              {faqItems.map((item) => (
+                <li key={item.question}>
                   <Check size={16} />
-                  <span>{search}</span>
+                  <span>{item.question}</span>
                 </li>
               ))}
             </ul>
           </article>
+        </div>
+
+        <div className="faqGrid" aria-label={`${service.cardTitle} questions`}>
+          {faqItems.map((item) => (
+            <article className="faqCard" key={item.question}>
+              <h3>{item.question}</h3>
+              <p>{item.answer}</p>
+            </article>
+          ))}
         </div>
       </section>
     </main>

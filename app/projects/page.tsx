@@ -1,26 +1,28 @@
 import type { Metadata } from "next";
-import { ArrowRight, MapPin, Sparkles } from "lucide-react";
+import { ArrowRight, Camera, MapPin } from "lucide-react";
+import { projectSeoPages } from "../project-data";
 import {
   businessLogo,
   businessName,
   contactPhone,
   serviceAreaName,
-  servicePages,
   siteDescription,
   siteUrl,
 } from "../seo";
 
 export const metadata: Metadata = {
-  title: "Georgia Concrete Services",
+  title: {
+    absolute: `Georgia Concrete Project Gallery | ${businessName}`,
+  },
   description:
-    "Concrete service pages for driveways, slabs, patios, walkways, pool decks, stamped concrete, demolition, grading, and site prep in Georgia.",
+    "Real Colquitt Concrete project pages with driveway, slab, pool deck, patio, walkway, stamped concrete, demolition, and site prep photos.",
   alternates: {
-    canonical: "/services",
+    canonical: "/projects",
   },
   openGraph: {
     type: "website",
-    url: "/services",
-    title: `Georgia Concrete Services | ${businessName}`,
+    url: "/projects",
+    title: `Georgia Concrete Project Gallery | ${businessName}`,
     description: siteDescription,
   },
 };
@@ -30,33 +32,33 @@ const structuredData = {
   "@graph": [
     {
       "@type": "CollectionPage",
-      "@id": `${siteUrl}/services#webpage`,
-      name: `Georgia Concrete Services | ${businessName}`,
-      url: `${siteUrl}/services`,
+      "@id": `${siteUrl}/projects#webpage`,
+      name: `Georgia Concrete Project Gallery | ${businessName}`,
+      url: `${siteUrl}/projects`,
       description:
-        "Concrete service pages for driveways, slabs, patios, walkways, pool decks, stamped concrete, demolition, grading, and site prep in Georgia.",
+        "Real Colquitt Concrete project pages with concrete driveway, slab, pool deck, patio, walkway, stamped concrete, demolition, and site prep photos.",
       inLanguage: "en-US",
       about: {
         "@id": `${siteUrl}/#business`,
       },
       mainEntity: {
-        "@id": `${siteUrl}/services#service-list`,
+        "@id": `${siteUrl}/projects#project-list`,
       },
     },
     {
       "@type": "ItemList",
-      "@id": `${siteUrl}/services#service-list`,
-      name: "Georgia concrete service pages",
-      itemListElement: servicePages.map((service, index) => ({
+      "@id": `${siteUrl}/projects#project-list`,
+      name: "Concrete project pages",
+      itemListElement: projectSeoPages.map((project, index) => ({
         "@type": "ListItem",
         position: index + 1,
-        url: `${siteUrl}${service.path}`,
-        name: service.title,
+        url: `${siteUrl}${project.path}`,
+        name: project.title,
       })),
     },
     {
       "@type": "BreadcrumbList",
-      "@id": `${siteUrl}/services#breadcrumbs`,
+      "@id": `${siteUrl}/projects#breadcrumbs`,
       itemListElement: [
         {
           "@type": "ListItem",
@@ -67,15 +69,15 @@ const structuredData = {
         {
           "@type": "ListItem",
           position: 2,
-          name: "Services",
-          item: `${siteUrl}/services`,
+          name: "Projects",
+          item: `${siteUrl}/projects`,
         },
       ],
     },
   ],
 };
 
-export default function ServicesPage() {
+export default function ProjectsPage() {
   return (
     <main>
       <script
@@ -102,16 +104,17 @@ export default function ServicesPage() {
         </div>
       </nav>
 
-      <section className="servicePageHero">
+      <section className="projectPageHero">
         <div>
           <p className="eyebrow">
-            <MapPin size={15} />
-            {serviceAreaName} organic service pages
+            <Camera size={15} />
+            {serviceAreaName} concrete project pages
           </p>
-          <h1>Concrete services built into search-friendly pages.</h1>
+          <h1>Real project pages for real concrete work.</h1>
           <p className="heroCopy">
-            Each service has its own clear URL, page title, description,
-            keyword targets, structured data, and estimate path.
+            Every project page gives customers and search engines a clearer look
+            at the work: the surface type, before/after photos, project proof,
+            and an estimate path.
           </p>
           <div className="heroActions">
             <a className="button primary" href="/#contact">
@@ -124,29 +127,30 @@ export default function ServicesPage() {
         </div>
       </section>
 
-      <section className="section serviceDirectory">
+      <section className="section projectDirectory">
         <div className="sectionHeader">
           <div>
             <p className="eyebrow dark">
-              <Sparkles size={15} />
-              Organic SEO targets
+              <MapPin size={15} />
+              Project SEO layer
             </p>
-            <h2>Dedicated pages for the work customers search for.</h2>
+            <h2>One crawlable page per concrete job type.</h2>
           </div>
           <p>
-            These pages are designed to help Google understand the business by
-            actual service category instead of relying on one generic homepage.
+            These are not fake landing pages. They are real project pages built
+            from the actual before and after photo library.
           </p>
         </div>
-        <div className="servicePageGrid">
-          {servicePages.map((service) => (
-            <article className="serviceCard" key={service.slug}>
-              <img src={service.image} alt={service.imageAlt} loading="lazy" />
+        <div className="projectDirectoryGrid">
+          {projectSeoPages.map((project) => (
+            <article className="projectTile" key={project.slug}>
+              <img src={project.afterImage} alt={project.imageAlt} loading="lazy" />
               <div>
-                <h3>{service.cardTitle}</h3>
-                <p>{service.summary}</p>
-                <a className="button serviceLink" href={service.path}>
-                  Open service page <ArrowRight size={15} />
+                <span>{project.type}</span>
+                <h3>{project.title}</h3>
+                <p>{project.summary}</p>
+                <a className="button serviceLink" href={project.path}>
+                  Open project page <ArrowRight size={15} />
                 </a>
               </div>
             </article>

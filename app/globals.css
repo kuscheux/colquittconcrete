@@ -573,11 +573,24 @@ h3 {
   margin: 5px 0 0;
 }
 
+.projectCardActions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  gap: 8px;
+}
+
 .projectRequestButton {
   min-height: 38px;
   padding: 9px 13px;
   font-size: 13px;
   white-space: nowrap;
+}
+
+.workFooterAction {
+  display: flex;
+  justify-content: center;
+  margin-top: 34px;
 }
 
 .phaseColumns {
@@ -725,6 +738,162 @@ h3 {
   color: var(--muted);
   font-family: var(--font-geist-mono), monospace;
   font-size: 12px;
+}
+
+.faqGrid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 14px;
+  margin-top: 20px;
+}
+
+.faqCard {
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  padding: 20px;
+  background: var(--surface);
+  box-shadow: 0 14px 28px var(--shadow);
+}
+
+.faqCard p {
+  margin-bottom: 0;
+  font-size: 14px;
+}
+
+.projectPageHero {
+  min-height: 82vh;
+  display: flex;
+  align-items: end;
+  padding: 170px clamp(18px, 5vw, 72px) 86px;
+  color: #ffffff;
+  background:
+    linear-gradient(90deg, rgba(0, 0, 0, 0.78), rgba(0, 0, 0, 0.38)),
+    url("/media/projects/pool-deck-extension/after/02-IMG_2795.jpg") center / cover;
+}
+
+.projectPageHero > div {
+  max-width: 880px;
+}
+
+.projectDirectory {
+  background: var(--paper);
+}
+
+.projectDirectoryGrid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 16px;
+}
+
+.projectTile {
+  overflow: hidden;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: var(--surface);
+  box-shadow: 0 18px 40px var(--shadow);
+}
+
+.projectTile img {
+  width: 100%;
+  height: 230px;
+  object-fit: cover;
+  filter: grayscale(0.1) contrast(1.05);
+}
+
+.projectTile div {
+  border-top: 4px solid var(--accent);
+  padding: 20px;
+}
+
+.projectTile span {
+  display: block;
+  margin-bottom: 8px;
+  color: var(--muted);
+  font-family: var(--font-geist-mono), monospace;
+  font-size: 11px;
+  text-transform: uppercase;
+}
+
+.projectTile p {
+  margin-bottom: 0;
+  font-size: 14px;
+}
+
+.projectDetailHero {
+  display: grid;
+  grid-template-columns: minmax(0, 0.86fr) minmax(0, 1.14fr);
+  min-height: 86vh;
+  color: #ffffff;
+  background: var(--inverse);
+}
+
+.projectHeroCopy {
+  display: flex;
+  flex-direction: column;
+  justify-content: end;
+  padding: 170px clamp(18px, 5vw, 72px) 72px;
+  background: #111111;
+}
+
+.projectDetailHero > img {
+  width: 100%;
+  height: 100%;
+  min-height: 86vh;
+  object-fit: cover;
+  filter: grayscale(0.1) contrast(1.04);
+}
+
+.projectDetailBody {
+  background: var(--paper);
+}
+
+.projectProofGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 18px;
+  margin-bottom: 24px;
+}
+
+.projectBeforeAfter {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16px;
+  margin-top: 22px;
+}
+
+.projectBeforeAfter > div {
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  padding: 14px;
+  background: var(--surface);
+  box-shadow: 0 18px 40px var(--shadow);
+}
+
+.projectBeforeAfter h3 {
+  margin-bottom: 12px;
+}
+
+.projectBeforeAfter img {
+  width: 100%;
+  aspect-ratio: 1.32;
+  border-radius: 6px;
+  object-fit: cover;
+}
+
+.projectPhotoGrid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 12px;
+  margin-top: 18px;
+}
+
+.projectPhotoGrid img {
+  width: 100%;
+  aspect-ratio: 1.22;
+  border-radius: 8px;
+  object-fit: cover;
+  background: var(--inverse);
+  box-shadow: 0 12px 24px var(--shadow);
 }
 
 .process {
@@ -910,7 +1079,8 @@ h3 {
   .process,
   .proof,
   .contact,
-  .serviceDetailHero {
+  .serviceDetailHero,
+  .projectDetailHero {
     grid-template-columns: 1fr;
   }
 
@@ -972,17 +1142,25 @@ h3 {
   .projectGroups,
   .phaseColumns,
   .servicePageGrid,
-  .serviceDetailGrid {
+  .serviceDetailGrid,
+  .faqGrid,
+  .projectDirectoryGrid,
+  .projectProofGrid,
+  .projectBeforeAfter,
+  .projectPhotoGrid {
     grid-template-columns: 1fr;
   }
 
-  .serviceDetailHero img {
+  .serviceDetailHero img,
+  .projectDetailHero > img {
     min-height: 52vw;
     order: -1;
   }
 
   .serviceHeroCopy,
-  .servicePageHero {
+  .servicePageHero,
+  .projectHeroCopy,
+  .projectPageHero {
     padding-top: 130px;
     padding-bottom: 58px;
   }
@@ -1007,6 +1185,10 @@ h3 {
     width: 100%;
   }
 
+  .projectCardActions {
+    justify-content: stretch;
+  }
+
   h1 {
     font-size: clamp(34px, 9.4vw, 39px);
     max-width: 11ch;
@@ -1018,6 +1200,7 @@ h3 {
 
   .serviceGrid,
   .servicePageGrid,
+  .projectDirectoryGrid,
   .proofList {
     grid-template-columns: 1fr;
   }

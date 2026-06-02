@@ -13,6 +13,7 @@ import {
 import { ContactForm } from "./ContactForm";
 import { HeroSlideshow } from "./HeroSlideshow";
 import { ProjectCoverflow } from "./ProjectCoverflow";
+import { photoProjects, projectSeoPages, type PhotoProject } from "./project-data";
 import {
   businessName,
   businessLogo,
@@ -26,15 +27,6 @@ import {
   siteDescription,
   siteUrl,
 } from "./seo";
-import projectData from "../public/media/projects/projects.json";
-
-type PhotoProject = {
-  slug: string;
-  title: string;
-  type: string;
-  before: string[];
-  after: string[];
-};
 
 const gallery = [
   {
@@ -101,8 +93,6 @@ const heroSlides = [
     rotation: -0.7,
   },
 ];
-
-const photoProjects = projectData as PhotoProject[];
 
 const featuredBeforeAfterSlugs = [
   "large-residential-drive",
@@ -267,6 +257,17 @@ const structuredData = {
       })),
     },
     {
+      "@type": "ItemList",
+      "@id": `${siteUrl}/#project-pages`,
+      name: "Concrete project pages",
+      itemListElement: projectSeoPages.map((project, index) => ({
+        "@type": "ListItem",
+        position: index + 1,
+        url: `${siteUrl}${project.path}`,
+        name: project.title,
+      })),
+    },
+    {
       "@type": "BreadcrumbList",
       "@id": `${siteUrl}/#breadcrumbs`,
       itemListElement: [
@@ -303,6 +304,7 @@ export default function Home() {
         <div className="navLinks">
           <a href="#services">Services</a>
           <a href="#work">Work</a>
+          <a href="/projects">Projects</a>
           <a href="#contact">Contact</a>
         </div>
       </nav>
@@ -405,12 +407,20 @@ export default function Home() {
                   <span>{project.type}</span>
                   <h3>{project.title}</h3>
                 </div>
-                <a
-                  className="button projectRequestButton"
-                  href={getProjectEstimateHref(project)}
-                >
-                  Request project like this <ArrowRight size={16} />
-                </a>
+                <div className="projectCardActions">
+                  <a
+                    className="button projectRequestButton"
+                    href={getProjectEstimateHref(project)}
+                  >
+                    Request project like this <ArrowRight size={16} />
+                  </a>
+                  <a
+                    className="button projectRequestButton"
+                    href={`/projects/${project.slug}`}
+                  >
+                    Full project page <ArrowRight size={16} />
+                  </a>
+                </div>
               </div>
               <div className="phaseColumns">
                 <div>
@@ -432,6 +442,11 @@ export default function Home() {
               </div>
             </article>
           ))}
+        </div>
+        <div className="workFooterAction">
+          <a className="button primary" href="/projects">
+            View all project SEO pages <ArrowRight size={17} />
+          </a>
         </div>
       </section>
 
